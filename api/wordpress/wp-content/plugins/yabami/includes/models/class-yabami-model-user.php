@@ -19,4 +19,17 @@ class Yabami_Model_User extends Yabami_Model {
 			'`user`.`alis_user_id`'
 		);
 	}
+
+	public function get_by_uid( $uid ) {
+		global $wpdb;
+		$wpdb->get_row( "SELECT alis_user_id FROM " . $this->table_name . " WHERE uid = ${uid}" );
+	}
+
+	public function save( $uid, $alis_user_id ) {
+		global $wpdb;
+		$wpdb->insert( $this->table_name, [
+			'uid'          => $uid,
+			'alis_user_id' => $alis_user_id
+		] );
+	}
 }

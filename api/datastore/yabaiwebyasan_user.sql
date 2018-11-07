@@ -16,23 +16,22 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `user_token`
+-- Table structure for table `user`
 --
 
-DROP TABLE IF EXISTS `user_token`;
+DROP TABLE IF EXISTS `user`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `user_token` (
+CREATE TABLE `user` (
   `uid` varchar(100) NOT NULL COMMENT 'Unique ID',
-  `twitter_access_token` varchar(500) NOT NULL COMMENT 'Twitter AccessToken',
-  `twitter_access_token_secret` varchar(500) DEFAULT NULL,
+  `alis_user_id` varchar(500) NOT NULL COMMENT 'ALIS User Id',
   PRIMARY KEY (`uid`),
   UNIQUE KEY `uid_UNIQUE` (`uid`)
-) ENGINE=InnoDB COMMENT='User Tokens';
+) ENGINE=InnoDB COMMENT='User';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `user_token`
+-- Dumping data for table `user`
 --
 
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
