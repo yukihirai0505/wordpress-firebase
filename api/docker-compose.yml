@@ -1,0 +1,43 @@
+version: '2'
+services:
+  db:
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: yabaiwebyasan
+      MYSQL_DATABASE: yabaiwebyasan
+      MYSQL_USER: yabaiwebyasan
+      MYSQL_PASSWORD: yabaiwebyasan
+    ports:
+      - "13306:3306"
+    volumes:
+      - "./datastore:/docker-entrypoint-initdb.d"
+
+  redis:
+    image: redis:4.0.9
+    restart: always
+    ports:
+      - "16379:6379"
+
+  wordpress:
+    image: wordpress:latest
+    restart: always
+    environment:
+      MYSQL_TEST: "yabaiwebyasan"
+      MYSQL_HOST: "db"
+      MYSQL_PORT: "3306"
+      REDIS_HOST: "redis"
+      REDIS_PORT: "6379"
+      TWITTER_CONSUMER_KEY: "${TWITTER_CONSUMER_KEY}"
+      TWITTER_CONSUMER_SECRET: "${TWITTER_CONSUMER_SECRET}"
+      JWT_AUTH_SECRET_KEY: "yabaiwebyasan"
+    links:
+      - db
+      - redis
+    ports:
+      - "8888:80"
+    volumes:
+      - "./wordpress/:/var/www/html"
+    depends_on:
+      - db
+      - redis
